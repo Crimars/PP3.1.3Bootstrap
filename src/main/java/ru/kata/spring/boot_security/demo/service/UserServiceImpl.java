@@ -75,14 +75,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return saveUser(user);
     }
 
+    @Override
+    @Transactional
     public boolean deleteUser(Long userId) {
-        Optional<User> user = userRepository.findById(userId);
-        if (user.isPresent()) {
-            userRepository.delete(user.get());
+        if (userRepository.existsById(userId)) {
+            userRepository.deleteById(userId);
             return true;
         }
         return false;
     }
+
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);

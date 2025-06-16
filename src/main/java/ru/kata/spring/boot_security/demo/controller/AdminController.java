@@ -81,14 +81,11 @@ public class AdminController {
 
     @DeleteMapping("/users/{id}")
     @ResponseBody
-    public ResponseEntity<String> deleteUser(@PathVariable Long id) {
-        boolean success = userServiceImpl.deleteUser(id);
-        if (success) {
-            return ResponseEntity.ok("User deleted successfully");
-        } else {
-            return ResponseEntity.notFound().build();
+    public String deleteUser(@PathVariable Long id) {
+        userServiceImpl.deleteUser(id);
+            return "redirect:/admin";
         }
-    }
+
 
 
     @PostMapping("/update")
