@@ -30,11 +30,15 @@ public class AdminController {
     @GetMapping
     public String adminHome(Model model) {
         model.addAttribute("users", userServiceImpl.getAllUsers());
-        model.addAttribute("newUser", new User());
-        model.addAttribute("roles", roleService.getAllRoles());
         return "admin";
     }
 
+    @GetMapping("/new")
+    public String newUserForm(Model model) {
+        model.addAttribute("user", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
+        return "new-user";
+    }
 
     @GetMapping("/users")
     @ResponseBody

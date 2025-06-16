@@ -41,12 +41,21 @@ public class SpringBootSecurityDemoApplication {
 				admin.setUsername("admin");
 				admin.setPassword(passwordEncoder.encode("admin")); // Пароль "admin"
 				admin.setRoles(Set.of(adminRole));
+				admin.setFirstName("Ivan");
+				admin.setLastName("Ivanov");
+				admin.setAge(35);
+				admin.setEmail("admin@mail.ru");
+				admin.setRoles(Set.of(adminRole, userRole));
 				userRepo.save(admin);
 
 
 				User user = new User();
 				user.setUsername("user");
 				user.setPassword(passwordEncoder.encode("user")); // Пароль "user"
+				user.setFirstName("Petr");
+				user.setLastName("Petrov");
+				user.setAge(30);
+				user.setEmail("user@mail.ru");
 				user.setRoles(Set.of(userRole));
 				userRepo.save(user);
 
