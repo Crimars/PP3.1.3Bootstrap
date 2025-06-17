@@ -69,7 +69,7 @@ public class AdminController {
     }
 
 
-    @PostMapping("/users")
+ /*   @PostMapping("/users")
     @ResponseBody
     public ResponseEntity<String> createUser(@RequestBody User user) {
         boolean success = userServiceImpl.saveUser(user);
@@ -78,7 +78,7 @@ public class AdminController {
         } else {
             return ResponseEntity.badRequest().body("Username already exists");
         }
-    }
+    }*/
 
 
     @DeleteMapping("/users/{id}")
@@ -104,6 +104,7 @@ public class AdminController {
     @PostMapping("/create")
     public String createUser(@ModelAttribute("newUser") @Valid User user,
                              BindingResult result, Model model) {
+        user.setUsername(user.getEmail());
         if (result.hasErrors()) {
             model.addAttribute("users", userServiceImpl.getAllUsers());
             model.addAttribute("roles", roleService.getAllRoles());

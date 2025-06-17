@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
@@ -51,9 +52,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public boolean saveUser(User user) {
         if (userRepository.findFirstByUsername(user.getUsername()) != null) {
             return false;
-
         }
-
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         return true;
