@@ -28,7 +28,7 @@ public class SpringBootSecurityDemoApplication {
 	) {
 		return args -> {
 
-			if (userRepo.findByUsername("admin") == null) {
+			if (userRepo.findFirstByUsername("admin") == null) {
 
 
 				Role adminRole = new Role(1L, "ROLE_ADMIN");

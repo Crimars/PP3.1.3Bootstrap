@@ -30,6 +30,8 @@ public class AdminController {
     @GetMapping
     public String adminHome(Model model) {
         model.addAttribute("users", userServiceImpl.getAllUsers());
+        model.addAttribute("newUser", new User());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin";
     }
 
@@ -107,8 +109,13 @@ public class AdminController {
             model.addAttribute("roles", roleService.getAllRoles());
             return "admin";
         }
-        userServiceImpl.saveUser(user);
+        boolean success = userServiceImpl.createUser(user);
+        if (!success) {
+            model.addAttribute("error", "Username already exists");
+            model.addAttribute("users", userServiceImpl.getAllUsers());
+            model.addAttribute("roles", roleService.getAllRoles());
+            return "admin";
+        }
         return "redirect:/admin";
     }
-
   }
