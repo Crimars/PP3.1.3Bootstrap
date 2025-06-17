@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     @Transactional
     public boolean createUser(User user) {
-        return saveUser(user);
+          return saveUser(user);
     }
 
     @Override
@@ -110,6 +110,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                     return true;
                 })
                 .orElse(false);
-
     }
 }
